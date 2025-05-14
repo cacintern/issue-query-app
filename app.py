@@ -22,7 +22,7 @@ df_Main = pd.read_csv("Main.csv")
 df_County = pd.read_csv("County.csv")
 df_Ambassadors = pd.read_csv("Ambassadors.csv")
 df_City_Town = pd.read_csv("City_Town.csv")
-df_Organizations_Coalitions = pd.read_csv("Organizations/Coalitions.csv")
+df_Organizations_Coalitions = pd.read_csv("Organizations_Coalitions.csv")
 df_Year = pd.read_csv("Year.csv")
 
 st.subheader("Preview of Your Data")
