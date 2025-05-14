@@ -25,12 +25,12 @@ df_City_Town = pd.read_csv("City/Town.csv")
 df_Organizations_Coalitions = pd.read_csv("Organizations/Coalitions.csv")
 df_Year = pd.read_csv("Year.csv")
 
-    st.subheader("Preview of Your Data")
-    st.dataframe(df.head(20))
+st.subheader("Preview of Your Data")
+st.dataframe(df.head(20))
 
-    user_query = st.text_input("🔍 Ask a question about your data (e.g. 'Show me issues in Elgin in 2019 where TIF is true'):")
+user_query = st.text_input("🔍 Ask a question about your data (e.g. 'Show me issues in Elgin in 2019 where TIF is true'):")
 
-    if user_query:
+if user_query:
         # Send user question + sample data to OpenAI
         prompt = f"""You are a data assistant. Based on the following table, answer the user's question.
 
