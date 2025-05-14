@@ -17,10 +17,14 @@ if not openai_api_key:
 openai.api_key = openai_api_key
 
 # Upload or load CSV data
-uploaded_file = st.sidebar.file_uploader("📁 Upload your CSV file", type="csv")
+df = pd.read_csv("Main.csv")  # replace with the exact name of your file
+df_Main = pd.read_csv("Main.csv")
+df_County = pd.read_csv("County.csv")
+df_Ambassadors = pd.read_csv("Ambassadors.csv")
+df_City_Town = pd.read_csv("City/Town.csv")
+df_Organizations_Coalitions = pd.read_csv("Organizations/Coalitions.csv")
+df_Year = pd.read_csv("Year.csv")
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
     st.subheader("Preview of Your Data")
     st.dataframe(df.head(20))
 
