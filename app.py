@@ -47,7 +47,6 @@ Here are a few rows from the dataset:
 {df.head(15).to_csv(index=False)}
 
 ⚠️ Only show a list of relevant issues from the 'Issue' column, unless the user asks for more details or other columns. Avoid repeating all columns unless requested.
-"""
 
 Respond clearly using only the data. If something is unclear, say what info is missing.
 """
