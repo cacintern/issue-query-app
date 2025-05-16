@@ -6,17 +6,54 @@ from openai import OpenAI
 # Set page config
 st.set_page_config(page_title="Issue Query App", layout="wide")
 
-# Custom blue and yellow banner
+# Custom header in Citizen Advocacy Center colors
 st.markdown(
     """
-    <div style='background-color:#FFD700; padding: 10px; border-radius: 8px; text-align:center; margin-bottom:20px'>
-        <h2 style='color:#0033A0;'>📘 Welcome to the Issue Query App</h2>
+    <style>
+        .main-header {
+            background-color: #FFD700;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .main-header h2 {
+            color: #0033A0;
+        }
+        .stSlider > div {
+            color: #0033A0;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 16px;
+            color: #0033A0;
+        }
+        .footer strong {
+            color: #FFD700;
+        }
+        .stButton>button {
+            background-color: #0033A0;
+            color: white;
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            border: none;
+        }
+        .stButton>button:hover {
+            background-color: #002270;
+        }
+        .stSlider .st-cf {
+            color: #0033A0 !important;
+        }
+    </style>
+    <div class="main-header">
+        <h2>📘 Welcome to the Issue Query App</h2>
     </div>
     """,
     unsafe_allow_html=True
 )
 
-# Sidebar with styled prompt for API key
+# Sidebar API key entry
 st.sidebar.markdown(
     """
     <div style='background-color:#0033A0; padding:10px; border-radius:5px'>
@@ -33,7 +70,7 @@ if not openai_api_key:
 
 client = OpenAI(api_key=openai_api_key)
 
-# Load all CSVs and merge on 'Issue'
+# Load and merge data on 'Issue'
 df_Main = pd.read_csv("Main.csv")
 df_County = pd.read_csv("County.csv")
 df_Ambassadors = pd.read_csv("Ambassadors.csv")
@@ -41,21 +78,19 @@ df_City_Town = pd.read_csv("City_Town.csv")
 df_Organizations_Coalitions = pd.read_csv("Organizations_Coalitions.csv")
 df_Year = pd.read_csv("Year.csv")
 
-# Merge all on 'Issue'
 df = df_Main
 for other_df in [df_County, df_Ambassadors, df_City_Town, df_Organizations_Coalitions, df_Year]:
     df = pd.merge(df, other_df, on="Issue", how="left")
 
-# Preview merged dataset
+# Data preview section
 st.subheader("🧾 Preview of Your Merged Data")
 num_rows = st.slider("How many rows to preview?", min_value=5, max_value=len(df), value=100, step=5)
 st.dataframe(df.head(num_rows))
 
-# Text input for user query
+# User query input
 user_query = st.text_input("🔍 Ask a question about your data (e.g. 'Show me issues with FOIA true in Elgin in 2019'):")
 
 if user_query:
-    # Prompt to OpenAI
     prompt = f"""You are a helpful data assistant. Use the table below to answer the user's question.
 
 User's question: {user_query}
@@ -80,3 +115,14 @@ Here are a few rows from the dataset:
             st.write(response.choices[0].message.content)
     except Exception as e:
         st.error(f"❌ OpenAI error: {e}")
+
+# Footer
+st.markdown(
+    """
+    <div class="footer">
+        Made with 💙 & 💛 by <strong>Citizen Advocacy Center</strong><br>
+        <em>“Let's build democracy!”</em>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
