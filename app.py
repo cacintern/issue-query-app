@@ -39,12 +39,15 @@ user_query = st.text_input("🔍 Ask a question about your data (e.g. 'Show me i
 # Only continue if query is entered
 if user_query:
     # Create prompt with a sample of the merged data
-    prompt = f"""You are a data assistant. Use the following table to answer the user's question.
+    prompt = f"""You are a helpful data assistant. Use the table below to answer the user's question.
 
 User's question: {user_query}
 
-Here are some rows from the dataset:
+Here are a few rows from the dataset:
 {df.head(15).to_csv(index=False)}
+
+⚠️ Only show a list of relevant issues from the 'Issue' column, unless the user asks for more details or other columns. Avoid repeating all columns unless requested.
+"""
 
 Respond clearly using only the data. If something is unclear, say what info is missing.
 """
