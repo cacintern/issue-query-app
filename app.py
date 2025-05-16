@@ -29,7 +29,7 @@ for sub_df in dfs_to_merge:
         df = pd.merge(df, sub_df, on="Issue", how="left")
 
 # Preview the merged dataset
-st.subheader("🧾 Preview of Your Merged Data")
+st.subheader("🧾 CAC Annual Report Merged Data")
 num_rows = st.slider("How many rows to preview?", min_value=5, max_value=len(df), value=20, step=5)
 st.dataframe(
     df.head(num_rows),
