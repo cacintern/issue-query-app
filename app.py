@@ -86,6 +86,15 @@ for other_df in [df_County, df_Ambassadors, df_City_Town, df_Organizations_Coali
 st.subheader("🧾 Preview of Your Merged Data")
 num_rows = st.slider("How many rows to preview?", min_value=5, max_value=len(df), value=100, step=5)
 st.dataframe(df.head(num_rows))
+# Add download button for merged dataset
+csv = df.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="📥 Download Merged Dataset as CSV",
+    data=csv,
+    file_name='merged_data.csv',
+    mime='text/csv',
+    key='download-csv'
+)
 
 # User query input
 user_query = st.text_input("🔍 Ask a question about your data (e.g. 'Show me issues with FOIA true in Elgin in 2019'):")
