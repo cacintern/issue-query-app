@@ -30,7 +30,7 @@ for sub_df in dfs_to_merge:
 
 # Preview the merged dataset
 st.subheader("🧾 Preview of Your Merged Data")
-num_rows = st.slider("How many rows to preview?", min_value=5, max_value=100, value=20, step=5)
+num_rows = st.slider("How many rows to preview?", min_value=5, max_value=len(df), value=20, step=5)
 st.dataframe(df.head(num_rows))
 
 # Get user's question
