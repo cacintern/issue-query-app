@@ -31,7 +31,12 @@ for sub_df in dfs_to_merge:
 # Preview the merged dataset
 st.subheader("🧾 Preview of Your Merged Data")
 num_rows = st.slider("How many rows to preview?", min_value=5, max_value=len(df), value=20, step=5)
-st.dataframe(df.head(num_rows))
+st.dataframe(
+    df.head(num_rows),
+    use_container_width=True,
+    hide_index=False,
+    column_order=("Issue", *[col for col in df.columns if col != "Issue"]),
+)
 
 # Get user's question
 user_query = st.text_input("🔍 Ask a question about your data (e.g. 'Show me issues in Elgin in 2019 where TIF is true'):")
